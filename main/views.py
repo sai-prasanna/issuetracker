@@ -4,6 +4,8 @@ from django.views.generic.edit import CreateView, UpdateView
 from .models import Ticket
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib.auth import logout
+from django.contrib import messages
 
 # Create your views here
 
@@ -11,6 +13,11 @@ from django.utils.decorators import method_decorator
 def home(request):
     return render(request,'main/index.html')
 
+
+def logout_view(request):
+    messages.success(request, 'Logged out successfully')
+    logout(request)
+    return redirect('index')
 
 class TicketCreate(CreateView):
     model = Ticket

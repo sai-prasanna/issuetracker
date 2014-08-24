@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,52 +11,59 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.css.map' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/style.css' %}">
     {% block head_extra %}{% endblock %}
 </head>   
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 column">
-                <div class="page-header">
-                    <h1>
-                        Issue Tracker
-                    </h1>
-                </div>
-            </div>
+        <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Issue Tracker</a>
         </div>
-
-        <div class="row" style='text-align:center;'>
-            <a href="{ url 'home' %}" >Home</a>
-            <a href="{ url 'about' %}">about</a>
-            <a href="{ url 'login' %}">Login</a>
-        </div>
-
-        
-
-
-
-        <div class="row">
-            <div class="col-md-12 column">
-                {% if messages %}
-
-                {% for message in messages %}
-
-                <div class="alert alert-dismissable">
-                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                   {{message}}
-               </div>
-               {% endfor %}
-               {% endif %}
-           </div>
-       </div>
-       <div class="row">
-
-        {% block content %}{% endblock %}
-
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="#">About</a></li>  
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+              {% if request.user.is_authenticated %}
+              <a href="{% url 'logout' %}" >Logout</a>
+              {% else %}
+              <a href="{% url 'login' %}" >Login</a>
+              {% endif %}
+          </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+    </div>
     </div>
 
+
+<div class="container"> 
+<div class="row">
+    <div class="col-md-12 column">
+        {% if messages %}
+
+        {% for message in messages %}
+
+        <div class="alert alert-dismissable">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+         {{message}}
+        </div>
+     {% endfor %}
+     {% endif %}
+ </div>
 </div>
-        {% block body_extra %}{% endblock %}
+{% block content %}{% endblock %}
+</div>
+{% block body_extra %}{% endblock %}
 
 </body>
 </html>

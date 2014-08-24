@@ -1,25 +1,21 @@
 {% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block head_extra %}<link rel="stylesheet" type="text/css" href="{% static 'main/css/login.css' %}">
+{% endblock %}
 {% block head_title %}Login{% endblock %}
 
 {% block content %}
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+<div class="row">
+    <div class="column col-md-6 col-md-offset-3" >
 
-<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
-
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{% url 'index' %}"/>
-</form>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="login" />
+            <input type="hidden" name="next" value="{% url 'index' %}"/>
+        </form>
+    </div>
+</div>
 {% endblock %}
