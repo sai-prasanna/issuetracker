@@ -36,5 +36,3 @@ nosetests.xml
 #Local setiings
 local_settings.py
 
-#migrations
-migrations/
