@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Client(models.Model):
@@ -23,13 +24,13 @@ class Ticket(models.Model):
     client = models.ForeignKey(Client, related_name='ticket')
     ticket_no = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
-    date_time = models.DateTimeField()
-    logged_by = models.CharField(max_length=200)
-    assigned_to = models.CharField(max_length=200)
+    date_time = models.DateTimeField(auto_now_add=True)
+    logged_by = models.ForeignKey(User, related_name='logged_ticket')
+    assigned_to = models.ForeignKey(User, related_name='assigned_ticket')
     priority = models.CharField(max_length=1, choices=PRIORITY)
     time_elapsed = models.DateTimeField()
-    description = models.TextField()
-    resolution = models.TextField()
+    description = models.TextField(blank=True, null=True)
+    resolution = models.TextField(blank=True, null=True)
 
 
 
