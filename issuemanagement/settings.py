@@ -61,19 +61,7 @@ ROOT_URLCONF = 'issuemanagement.urls'
 WSGI_APPLICATION = 'issuemanagement.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'issuedb',
-        'USER': 'root',
-        'PASSWORD': 'sai123',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-    }
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -96,3 +84,7 @@ STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
+try:
+    from local_settings import *
+except ImportError:
+    pass
