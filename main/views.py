@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, ListView
 from .models import Ticket
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -33,3 +33,7 @@ class TicketCreate(CreateView):
 class TicketUpdate(UpdateView):
     model = Ticket
 
+class TicketList(ListView):
+    model = Ticket
+    context_object_name = "ticket_list"
+    paginate_by = 10
