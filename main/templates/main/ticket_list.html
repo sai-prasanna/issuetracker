@@ -3,8 +3,33 @@
 
 {% block head_title %}Create Ticket{% endblock %}
 
+{% block head_extra %}
+<style type="text/css">
+.list_ticket td a {color:black; font-weight: normal;}
+.list_ticket td a:hover {color:black; font-weight: bold;}
+</style>
+{% endblock %}
 {% block content %}
 <div class="row">
-    Ticket List
+	<div class="panel panel-default">
+		<!-- Default panel contents -->
+		<div class="panel-heading">Ticket List</div>
+		<!-- Table -->
+		<table class="table">
+			<tr>
+				<th>Name</th>
+				<th>Client</th>
+				<th>Ticket no</th>
+			</tr>
+			{% for ticket in ticket_list %}
+			<tr class="list_ticket">
+				<td><a href="{% url 'ticket_detail' ticket.id %}">{{ticket.name}}</a></td>
+				<td>{{ticket.client}}</td>
+				<td>{{ticket.ticket_no}}</td>
+			</tr>
+			{% endfor %}
+
+		</table>
+	</div>
 </div>
 {% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
-from django.views.generic import CreateView, UpdateView, ListView
+from django.views.generic import CreateView, UpdateView, ListView, DetailView
 from .models import Ticket
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -21,19 +21,22 @@ def logout_view(request):
 
 class TicketCreate(CreateView):
     model = Ticket
+    success_url="/tickets"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        group = Group.objects.get(name='Engineers')
+        group = Group.objects.get(name='Helpdesk')
         if group in self.request.user.groups.all():
             return super(TicketCreate, self).dispatch(*args, **kwargs)
         else:
             return redirect('index')
 
-class TicketUpdate(UpdateView):
-    model = Ticket
-
 class TicketList(ListView):
     model = Ticket
     context_object_name = "ticket_list"
     paginate_by = 10
+
+
+class TicketDetail(DetailView):
+    model = Ticket
+    context_object_name = 'ticket'
