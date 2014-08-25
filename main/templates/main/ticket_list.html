@@ -9,6 +9,14 @@
 .list_ticket td a:hover {color:black; font-weight: bold;}
 </style>
 {% endblock %}
+{% block welcome %}
+<li>
+	{% if request.user.is_authenticated %}
+    	<a href="#" style="color:#FFF;">Welcome {{request.user.group}} {{request.user.username}}</a>
+	{% endif %}
+</li>
+
+{% endblock %}
 {% block content %}
 <div class="row">
 	<div class="panel panel-default">
@@ -20,12 +28,21 @@
 				<th>Name</th>
 				<th>Client</th>
 				<th>Ticket no</th>
+				<th>Status</th>
 			</tr>
 			{% for ticket in ticket_list %}
 			<tr class="list_ticket">
 				<td><a href="{% url 'ticket_detail' ticket.id %}">{{ticket.name}}</a></td>
 				<td>{{ticket.client}}</td>
 				<td>{{ticket.ticket_no}}</td>
+				<td>
+				{% ifequal ticket.status "N" %}
+					<span class="label label-success">{{ticket.get_status_display}}</span>
+				{% endifequal %}
+				{% ifequal ticket.status "V" %}
+					<span class="label label-primary">{{ticket.get_status_display}}</span>
+				{% endifequal %}
+				</td>
 			</tr>
 			{% endfor %}
 
