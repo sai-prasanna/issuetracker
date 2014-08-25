@@ -1,9 +1,28 @@
 {% extends 'main/base.html' %}
 {% load crispy_forms_tags %}
-
 {% block head_title %}Ticket Deatils{% endblock %}
-
+{% block head_extra %}
+<style type="text/css">
+.head h1{text-align: center;}
+.head span{text-align: right; display:inline-block;}
+.head h2{text-align: right; display:block; font-size: 120%; float:right; margin: 0px;}
+.status .label{font-size: 90%;}
+.status {font-size: 130%;}
+</style>
+{% endblock %}
 {% block content %}
-{{ticket}}
+<div class="head">
+	<h1>{{ticket.name}}</h1>
+	<h2>Ticket Number:<span>{{ticket.ticket_no}}</span></h2>
+	<div class="status">
+	Current Status: 
+	{% ifequal ticket.status "N" %}
+	<span class="label label-success">{{ticket.get_status_display}}</span>
+	{% endifequal %}
+	{% ifequal ticket.status "V" %}
+	<span class="label label-primary">{{ticket.get_status_display}}</span>
+	{% endifequal %}
+</div>
+</div>
 
 {% endblock %}
