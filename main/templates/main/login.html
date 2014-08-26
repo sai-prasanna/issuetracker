@@ -7,14 +7,6 @@
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/login.css' %}">
 {% endblock %}
 
-{% block welcome %}
-<li>
-	{% if request.user.is_authenticated %}
-    	<a href="#" style="color:#FFF;">Welcome {{request.user.group}} {{request.user.username}}</a>
-	{% endif %}
-</li>
-
-{% endblock %}
 {% block head_title %}Login{% endblock %}
 
 {% block content %}

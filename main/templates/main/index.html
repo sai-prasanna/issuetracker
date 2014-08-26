@@ -1,28 +1,54 @@
 {% extends 'main/base.html' %}
-{% block title %}Index{% endblock %}
-{% block welcome %}
-<li>
-	{% if request.user.is_authenticated %}
-    	<a href="#" style="color:#FFF;">Welcome {{request.user.username}}</a>
-	{% endif %}
-</li>
-{% endblock %}
+{% load static %}
+{% block head_title %}Index{% endblock %}
 
 {% block head_extra %}
+<script type="text/javascript" src="{% static 'main/slider/jquery.flexslider-min.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'main/slider/flexslider.css' %}">
 <style type="text/css">
-.issue_create {background-color: #101010; width:11%; height:70px;text-align: center;}
+.issue_create {background-color: #101010; width:30%;height:70px;text-align: center; margin-left: 30%;}
 .issue_create span {display: block; padding-top: 17%; color: #FFF; text-decoration: none;}
+.logo {width: 40%;}
+.flex-viewport {height:500px;}
+.slides li img {height:500px;}
+.page-header {text-align: center;}
 </style>
+<script type="text/javascript">
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide"
+  });
+});
+</script>
 {% endblock %}
 {% block content %}
-{% for group in user.groups.all %}
-    {% if group.name == 'Helpdesk' %}
-       <a href="{% url 'ticket_create' %}" style="text-decoration: none;">
-       		<div class="issue_create">
-       			<span>Create Issue</span>
-       		</div>
-       </a>
-    {% endif %}
-{% endfor %}
+<div class="row">
+  	<div class="col-md-3">
+  		<img class="logo" src="{% static 'main/images/no-bugs.png' %}">
+  	</div>
+  	<div class="col-md-6">
+  		<div class="page-header">
+  			<h1>ERC - Solutions<small><small>We support You</small></small></h1>
+		</div>
+  	</div>
+	<div class="col-md-3"></div>
+	<div class="row">
+		<div class="col-md-12">
+		<div class="flexslider">
+  			<ul class="slides">
+    			<li>
+      				<img src="{% static 'main/images/slide1.png' %}" />
+    			</li>
+    			<li>
+      				<img src="{% static 'main/images/slide2.jpg' %}" />
+    			</li>
+    			<li>
+      				<img src="{% static 'main/images/slide3.jpg' %}" />
+    			</li>
+  			</ul>
+		</div>
+		</div>
+	</div>
+</div>
 {% endblock %}
 

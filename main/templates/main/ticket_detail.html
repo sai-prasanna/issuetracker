@@ -13,14 +13,7 @@
 .desc {padding-top: 4%;}
 </style>
 {% endblock %}
-{% block welcome %}
-<li>
-	{% if request.user.is_authenticated %}
-    	<a href="#" style="color:#FFF;">Welcome {{request.user.group}} {{request.user.username}}</a>
-	{% endif %}
-</li>
 
-{% endblock %}
 {% block content %}
 <div class="row">
 	<div class="page-header">
