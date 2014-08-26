@@ -12,6 +12,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.css.map' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/style.css' %}">
+    <style type="text/css">
+    .footer {padding-top: 60px; text-align: left;}
+    </style>
+    
     {% block head_extra %}{% endblock %}
 </head>   
 <body>
@@ -30,9 +34,24 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="{% url 'index' %}">Home</a></li>
+            {% for group in user.groups.all %}
+            {% if group.name == 'Helpdesk' %}
+            <li>
+                <a href="{% url 'ticket_create' %}" style="text-decoration: none;">Create Issue</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+            <li><a href="{% url 'ticket_list' %}">View Issues</a></li>
             <li><a href="#">About</a></li>  
         </ul>
         <ul class="nav navbar-nav navbar-right">
+          <li>
+          {% if request.user.is_authenticated %}
+            <a href="#" style="color:#FFF;">Welcome {{request.user.username}}</a>
+          {% else %}
+            <li><a href="#">New User?</a></li>
+          {% endif %}
+          </li>
             <li>
               {% if request.user.is_authenticated %}
               <a href="{% url 'logout' %}" >Logout</a>
@@ -40,15 +59,14 @@
               <a href="{% url 'login' %}" >Login</a>
               {% endif %}
           </li>
-          {% block welcome %}{% endblock %}
       </ul>
     </div><!--/.nav-collapse -->
     </div>
     </div>
 
 
-<div class="container"> 
-<div class="row">
+<div class="container" style="height:600px;"> 
+<div class="row" style="">
     <div class="col-md-12 column">
         {% if messages %}
 
@@ -64,7 +82,12 @@
 </div>
 {% block content %}{% endblock %}
 </div>
-{% block body_extra %}{% endblock %}
 
+{% block body_extra %}{% endblock %}
+<div class="footer">
+  <div class="container">
+    © 1999-2014 ERC Solutions, Inc. All Rights Reserved.
+  </div>
+</div>
 </body>
 </html>

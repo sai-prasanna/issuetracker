@@ -9,14 +9,7 @@
 .list_ticket td a:hover {color:black; font-weight: bold;}
 </style>
 {% endblock %}
-{% block welcome %}
-<li>
-	{% if request.user.is_authenticated %}
-    	<a href="#" style="color:#FFF;">Welcome {{request.user.group}} {{request.user.username}}</a>
-	{% endif %}
-</li>
 
-{% endblock %}
 {% block content %}
 <div class="row">
 	<div class="panel panel-default">
