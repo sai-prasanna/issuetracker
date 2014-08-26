@@ -45,6 +45,7 @@ INSTALLED_APPS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.contrib.auth.context_processors.auth",
+    'django.contrib.messages.context_processors.messages',
 
 )
 
@@ -84,6 +85,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+LOGIN_URL = '/login'
 
 try:
     from local_settings import *

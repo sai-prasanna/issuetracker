@@ -19,40 +19,35 @@
 	<div class="page-header">
   		<h1>{{ticket.name}} <small>{{ticket.client}}</small></h1>
 	</div>
+</div>
 <div class="row">
 	<div class="col-md-6">
 		<div class="status">
 			Current Status: 
-			{% ifequal ticket.status "N" %}
-			<span class="label label-success">{{ticket.get_status_display}}</span>
-			{% endifequal %}
-			{% ifequal ticket.status "V" %}
-			<span class="label label-primary">{{ticket.get_status_display}}</span>
-			{% endifequal %}
+			<span class="label {% if ticket.status == 'N' %}label-default{% elif ticket.status == 'U' %}label-primary{% elif ticket.status == 'R' %}label-info{% elif ticket.status == 'V' %}label-success{% endif %}">{{ticket.get_status_display}}</span>
+
 		</div>
 		<div class="priority">
 			<div> Priority <span class="glyphicon glyphicon-hand-right"> {{ticket.get_priority_display}}</div>
-			{% ifequal ticket.priority "H" %}
+			{% if ticket.priority == "H" %}
 			<div class="progress">
   				<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
     				<span class="sr-only">100% Complete</span>
   				</div>
 			</div>
-			{% endifequal %}
-			{% ifequal ticket.priority "N" %}
+			{% elif ticket.priority ==  "N" %}
 			<div class="progress">
   				<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
     				<span class="sr-only">70% Complete</span>
   				</div>
 			</div>
-			{% endifequal %}
-			{% ifequal ticket.priority "L" %}
+			{% elif ticket.priority == "L" %}
 			<div class="progress">
   				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
     				<span class="sr-only">40% Complete</span>
   				</div>
 			</div>
-			{% endifequal %}
+			{% endif %}
 		</div>
 	</div>
 	<div class="col-md-3"></div>

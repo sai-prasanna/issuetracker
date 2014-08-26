@@ -41,6 +41,9 @@ class Ticket(models.Model):
         for field in Ticket._meta.fields:
             li.append((field.verbose_name, field.value_to_string(self)))
         return li
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('ticket_detail', args=[str(self.id)])
 
     def __unicode__(self):
         return self.ticket_no + ':' + self.name + ":" + unicode(self.client) 

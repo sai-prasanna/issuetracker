@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from .views import TicketCreateView, TicketListView, TicketDetailView
+from .views import TicketCreateView, TicketListView, TicketDetailView, TicketUpdateView
 from django.contrib import admin
 admin.autodiscover()
 
@@ -10,6 +10,8 @@ urlpatterns = patterns('',
         url(r'^tickets/$', TicketListView.as_view(), name='ticket_list'),
         url(r'^tickets/new/$', TicketCreateView.as_view(), name='ticket_create'),
         url(r'^tickets/(?P<pk>[0-9]+)/$',TicketDetailView.as_view(), name='ticket_detail'),
+        url(r'^tickets/(?P<pk>[0-9]+)/update$',TicketUpdateView.as_view(), name='ticket_update'),
+
 
 
     )

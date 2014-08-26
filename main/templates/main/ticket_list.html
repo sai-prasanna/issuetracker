@@ -14,19 +14,10 @@
 .list_ticket td a:hover {color:black; font-weight: bold;}
 </style>
 {% endblock %}
-
-
 {% block content %} 
-
 <div class="endless_page_template">
-
     {% include page_template %}
-
-
-
 {% endblock %}
-
-
 {% block js %}
     {{ block.super }}
     <script src="{% static 'endless_pagination/js/endless-pagination.js' %}"></script>
