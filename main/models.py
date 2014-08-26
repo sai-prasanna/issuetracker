@@ -7,6 +7,7 @@ class Client(models.Model):
     address = models.TextField()
     email = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
+   
     def __unicode__(self):
         return self.name
 
@@ -34,11 +35,15 @@ class Ticket(models.Model):
     time_elapsed = models.DateTimeField()
     description = models.TextField(blank=True, null=True)
     resolution = models.TextField(blank=True, null=True)
+    
     def get_fields(self):
         li=[]
         for field in Ticket._meta.fields:
             li.append((field.verbose_name, field.value_to_string(self)))
         return li
+
+    def __unicode__(self):
+        return self.ticket_no + ':' + self.name + ":" + unicode(self.client) 
 
 
 

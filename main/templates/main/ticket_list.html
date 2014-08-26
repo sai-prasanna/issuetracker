@@ -36,12 +36,19 @@
 				<td>{{ticket.client}}</td>
 				<td>{{ticket.ticket_no}}</td>
 				<td>
-				{% ifequal ticket.status "N" %}
-					<span class="label label-success">{{ticket.get_status_display}}</span>
-				{% endifequal %}
-				{% ifequal ticket.status "V" %}
-					<span class="label label-primary">{{ticket.get_status_display}}</span>
-				{% endifequal %}
+					<span class="label 
+					{% if ticket.status == 'N' %}
+						label-default
+					{% elif ticket.status == 'U' %}
+						label-primary
+					{% elif ticket.status == 'R' %}
+						label-info
+					{% elif ticket.status == 'V' %}
+						label-success
+					{% endif %}
+					">{{ticket.get_status_display}}</span>
+				
+
 				</td>
 			</tr>
 			{% endfor %}

@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'south',
     'crispy_forms',
     'main',
+    'endless_pagination',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
