@@ -82,15 +82,15 @@
 {% block content %}{% endblock %}
 </div>
 {% block body_extra %}{% endblock %}
-{% block js %}    
-  <script type="text/javascript" src="{% static 'main/js/jquery-2.1.1.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'main/js/bootstrap.min.js' %}"></script>
-{% endblock %}
 
 <div class="footer">
   <div class="container">
     © 1999-2014 ERC Solutions, Inc. All Rights Reserved.
   </div>
 </div>
+{% block js %}    
+  <script type="text/javascript" src="{% static 'main/js/jquery-2.1.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'main/js/bootstrap.min.js' %}"></script>
+{% endblock %}
 </body>
 </html>
