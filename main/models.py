@@ -25,7 +25,7 @@ class Ticket(models.Model):
 
          )
     client = models.ForeignKey(Client, related_name='ticket')
-    ticket_no = models.CharField(max_length=200)
+   #ticket_no = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     date_time = models.DateTimeField(auto_now_add=True)
     logged_by = models.ForeignKey(User, related_name='logged_ticket')

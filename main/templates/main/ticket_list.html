@@ -34,7 +34,7 @@
 			<tr class="list_ticket">
 				<td><a href="{% url 'ticket_detail' ticket.id %}">{{ticket.name}}</a></td>
 				<td>{{ticket.client}}</td>
-				<td>{{ticket.ticket_no}}</td>
+				<td>{{ticket.id}}</td>
 				<td>
 					<span class="label 
 					{% if ticket.status == 'N' %}
