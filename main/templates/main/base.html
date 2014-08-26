@@ -1,17 +1,16 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     
     <title>{% block head_title %} {% endblock %}</title>
-    <script type="text/javascript" src="{% static 'main/js/jquery-2.1.1.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'main/js/bootstrap.min.js' %}"></script>
 
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.css.map' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/style.css' %}">
+    {% block css %}
+      <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.min.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.css.map' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'main/css/style.css' %}">
+    {% endblock %}
     {% block head_extra %}{% endblock %}
 </head>   
 <body>
@@ -65,6 +64,9 @@
 {% block content %}{% endblock %}
 </div>
 {% block body_extra %}{% endblock %}
-
+{% block js %}    
+  <script type="text/javascript" src="{% static 'main/js/jquery-2.1.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'main/js/bootstrap.min.js' %}"></script>
+{% endblock %}
 </body>
 </html>

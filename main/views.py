@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth.models import User
+from endless_pagination.views import AjaxListView
 
 # Create your views here
 
@@ -21,13 +22,13 @@ def logout_view(request):
     logout(request)
     return redirect('index')
 
-class TicketCreate(CreateView):
+class TicketCreateView(CreateView):
     model = Ticket
     success_url="/tickets"
     form_class = CreateTicketForm
 
     def get_form(self, form_class):
-        form = super(TicketCreate, self).get_form(form_class)
+        form = super(TicketCreateView, self).get_form(form_class)
         form.fields['assigned_to'].queryset = User.objects.filter(groups__name='Engineers')
         form.instance.logged_by = self.request.user
         return form
@@ -37,16 +38,17 @@ class TicketCreate(CreateView):
     def dispatch(self, *args, **kwargs):
         group = Group.objects.get(name='Helpdesk')
         if group in self.request.user.groups.all():
-            return super(TicketCreate, self).dispatch(*args, **kwargs)
+            return super(TicketCreateView, self).dispatch(*args, **kwargs)
         else:
             return redirect('index')
 
-class TicketList(ListView):
+class TicketListView(AjaxListView):
     model = Ticket
     context_object_name = "ticket_list"
+    template_name = "ticket_list.html"
     paginate_by = 10
 
 
-class TicketDetail(DetailView):
+class TicketDetailView(DetailView):
     model = Ticket
     context_object_name = 'ticket'

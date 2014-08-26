@@ -30,7 +30,7 @@ class Ticket(models.Model):
     date_time = models.DateTimeField(auto_now_add=True)
     logged_by = models.ForeignKey(User, related_name='logged_ticket')
     assigned_to = models.ForeignKey(User, related_name='assigned_ticket')
-    priority = models.CharField(max_length=1, choices=PRIORITY)
+    priority = models.CharField(max_length=1, choices=PRIORITY, default=STATUS[0][0])
     status = models.CharField(max_length=1,choices=STATUS)
     time_elapsed = models.DateTimeField()
     description = models.TextField(blank=True, null=True)
