@@ -3,7 +3,6 @@
 {% block head_title %}Index{% endblock %}
 
 {% block head_extra %}
-<script type="text/javascript" src="{% static 'main/slider/jquery.flexslider-min.js' %}"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'main/slider/flexslider.css' %}">
 <style type="text/css">
 .issue_create {background-color: #101010; width:30%;height:70px;text-align: center; margin-left: 30%;}
@@ -13,13 +12,6 @@
 .slides li img {height:500px;}
 .page-header {text-align: center;}
 </style>
-<script type="text/javascript">
-$(window).load(function() {
-  $('.flexslider').flexslider({
-    animation: "slide"
-  });
-});
-</script>
 {% endblock %}
 {% block content %}
 <div class="row">
@@ -51,4 +43,16 @@ $(window).load(function() {
 	</div>
 </div>
 {% endblock %}
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'main/slider/jquery.flexslider-min.js' %}"></script>
+    <script type="text/javascript">
+      $(window).load(function() {
+      $('.flexslider').flexslider({
+      animation: "slide"
+      });
+    });
+</script>
+{% endblock %}
+
 
