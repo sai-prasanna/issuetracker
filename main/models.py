@@ -46,7 +46,7 @@ class Ticket(models.Model):
         return reverse('ticket_detail', args=[str(self.id)])
 
     def __unicode__(self):
-        return self.name + ":" + unicode(self.client) 
+        return self.ticket_no + ':' + self.name + ":" + unicode(self.client) 
 
 
 
