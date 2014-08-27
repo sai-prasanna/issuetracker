@@ -73,16 +73,17 @@
  </div>
 </div>
 {% block content %}{% endblock %}
+</div>
 
+
+{% block body_extra %}{% endblock %}
+{% block footer %}
 <div class="row">
     <div class="col-md-12" style="margin-top:40px;text-align:left;font-weight:bold;">
        <span id="footer">© 1999-2014 ERC Solutions, Inc. All Rights Reserved.</span>
   </div>
 </div>
-</div>
-{% block body_extra %}{% endblock %}
-
-   
+{% endblock %}
 {% block js %}    
   <script type="text/javascript" src="{% static 'main/js/jquery-2.1.1.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'main/js/bootstrap.min.js' %}"></script>
