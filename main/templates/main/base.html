@@ -34,39 +34,34 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="{% url 'index' %}">Home</a></li>
             {% for group in user.groups.all %}
-            {% if group.name == 'Helpdesk' %}
-            <li>
-                <a href="{% url 'ticket_create' %}" style="text-decoration: none;">Create Issue</a>
-            </li>
+              {% if group.name == 'HelpDesk' %}
+              <li>
+                  <a href="{% url 'ticket_create' %}" style="text-decoration: none;">Create Issue</a>
+              </li>
             {% endif %}
             {% endfor %}
             <li><a href="{% url 'ticket_list' %}">View Issues</a></li>
             <li><a href="#">About</a></li>  
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li>
+          
           {% if request.user.is_authenticated %}
-            <a href="#" style="color:#FFF;">Welcome {{request.user.username}}</a>
+            <li><a href="#" style="color:#FFF;">Welcome {{request.user.username}}</a></li>
+            <li><a href="{% url 'logout' %}" >Logout</a></li>
           {% else %}
             <li><a href="#">New User?</a></li>
+            <li><a href="{% url 'login' %}" >Login</a></li>
           {% endif %}
-          </li>
-            <li>
-              {% if request.user.is_authenticated %}
-              <a href="{% url 'logout' %}" >Logout</a>
-              {% else %}
-              <a href="{% url 'login' %}" >Login</a>
-              {% endif %}
-          </li>
+
       </ul>
     </div><!--/.nav-collapse -->
     </div>
     </div>
 
 
-<div class="container" style="height:600px;"> 
+<div class="container" style=""> 
 <div class="row">
-    <div class="col-md-12 column">
+    <div class="col-md-12">
         {% if messages %}
         {% for message in messages %}
         <div class="alert alert-dismissable alert-{{ message.tags }}">
@@ -78,14 +73,16 @@
  </div>
 </div>
 {% block content %}{% endblock %}
+
+<div class="row">
+    <div class="col-md-12" style="margin-top:40px;text-align:left;font-weight:bold;">
+       <span id="footer">© 1999-2014 ERC Solutions, Inc. All Rights Reserved.</span>
+  </div>
+</div>
 </div>
 {% block body_extra %}{% endblock %}
 
-<div class="footer">
-  <div class="container">
-    © 1999-2014 ERC Solutions, Inc. All Rights Reserved.
-  </div>
-</div>
+   
 {% block js %}    
   <script type="text/javascript" src="{% static 'main/js/jquery-2.1.1.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'main/js/bootstrap.min.js' %}"></script>

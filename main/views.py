@@ -42,7 +42,7 @@ class TicketCreateView(SuccessMessageMixin, CreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        if self.request.user.groups.filter(name='Helpdesk').exist():
+        if self.request.user.groups.filter(name='Helpdesk').exists():
             return super(TicketCreateView, self).dispatch(*args, **kwargs)
         else:
             return redirect('index')
@@ -71,6 +71,10 @@ class TicketUpdateView(SuccessMessageMixin, UpdateView):
     def get_form_class(self):
         if self.request.user.groups.filter(name='Engineers').exists():
             return EngineerUpdateTicketForm
+        elif self.request.user.groups.filter(name='HelpDesk').exists():
+            self.template_name = 'main/ticket_form.html'
+            return CreateTicketForm
+
         
 
     @method_decorator(login_required)

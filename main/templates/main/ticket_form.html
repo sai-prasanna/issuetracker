@@ -9,7 +9,9 @@
     <div class="column col-md-6 col-md-offset-3">
         <form action="" method="post">{% csrf_token %}
             {{ form|crispy }}
-            <input type="submit" value="Create" />
+
+
+            <input type="submit" value={% if request.resolver_match.url_name == "ticket_update" %}"Update"{% else%}"Create"{% endif %} />
         </form>
     </div>
 </div>

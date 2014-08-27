@@ -11,6 +11,9 @@
 .priority {padding-top: 10%; font-size: 150%;}
 .page-header {text-align: center;}
 .desc {padding-top: 4%;}
+.update{display: inline-block;float: right;}
+.update a{text-decoration: none; color:#222;}
+.update a:hover {color:black; font-weight: bold;}
 </style>
 {% endblock %}
 
@@ -18,7 +21,11 @@
 <div class="row">
 	<div class="page-header">
   		<h1>{{ticket.name}} <small>{{ticket.client}}</small></h1>
+        <div class="update">
+        <a href="/tickets/{{ticket.id}}/update"> Update&nbsp&nbsp&nbsp<span class="glyphicon glyphicon-pencil"></span></a>
+    </div>
 	</div>
+    
 </div>
 <div class="row">
 	<div class="col-md-6">
