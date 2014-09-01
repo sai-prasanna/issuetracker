@@ -1,0 +1,31 @@
+{% load endless %}
+
+<div class="row">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Ticket List</div>
+        <!-- Table -->
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Client</th>
+                <th>Ticket no</th>
+                <th>Status</th>
+            </tr>
+            {% paginate user_ticketlist %}
+
+            {% for ticket in user_ticketlist %}
+            <tr class="list_ticket">
+                <td><a href="{% url 'ticket_detail' ticket.id %}">{{ticket.name}}</a></td>
+                <td>{{ticket.client}}</td>
+                <td>{{ticket.id}}</td>
+                <td>
+                    <span class="label {% if ticket.status == 'N' %}label-default{% elif ticket.status == 'U' %}label-primary{% elif ticket.status == 'R' %}label-info{% elif ticket.status == 'V' %}label-success{% endif %}">{{ticket.get_status_display}}</span>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        {% show_pages %}
+    </div>
+</div>

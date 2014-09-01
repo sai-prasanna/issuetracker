@@ -3,13 +3,12 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Client(models.Model):
-    name = models.CharField(max_length=200)
+    user=models.OneToOneField(User)
     address = models.TextField()
-    email = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
    
     def __unicode__(self):
-        return self.name
+        return self.address
 
 class Ticket(models.Model):
     PRIORITY = (
@@ -24,8 +23,7 @@ class Ticket(models.Model):
             ('V', 'Verified'),
 
          )
-    client = models.ForeignKey(Client, related_name='ticket')
-   #ticket_no = models.CharField(max_length=200)
+    client = models.ForeignKey(User, related_name='ticket')
     name = models.CharField(max_length=200)
     date_time = models.DateTimeField(auto_now_add=True)
     logged_by = models.ForeignKey(User, related_name='logged_ticket')
@@ -46,7 +44,7 @@ class Ticket(models.Model):
         return reverse('ticket_detail', args=[str(self.id)])
 
     def __unicode__(self):
-        return self.ticket_no + ':' + self.name + ":" + unicode(self.client) 
+        return str(self.id) + ':' + self.name + ":" + unicode(self.client) 
 
 
 

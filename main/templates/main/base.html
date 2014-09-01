@@ -49,7 +49,7 @@
             <li><a href="#" style="color:#FFF;">Welcome {{request.user.username}}</a></li>
             <li><a href="{% url 'logout' %}" >Logout</a></li>
           {% else %}
-            <li><a href="#">New User?</a></li>
+            <li><a href="{% url 'register' %}">New User?</a></li>
             <li><a href="{% url 'login' %}" >Login</a></li>
           {% endif %}
 

@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block css %}
+ {{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/login.css' %}">
+{% endblock %}
+
+
+{% block head_title %}Registration{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="column col-md-6 col-md-offset-3" >
+
+	<form action="{% url 'register' %}" method="post">{% csrf_token %}
+    	
+    		{{ form|crispy }}
+    	
+    	<input type="submit" value="Register" />
+
+	</form>
+
+	</div>
+</div>
+{% endblock %}
