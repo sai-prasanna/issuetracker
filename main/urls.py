@@ -12,7 +12,6 @@ urlpatterns = patterns('',
         url(r'^tickets/(?P<pk>[0-9]+)/$',TicketDetailView.as_view(), name='ticket_detail'),
         url(r'^tickets/(?P<pk>[0-9]+)/update/$',TicketUpdateView.as_view(), name='ticket_update'),
         url(r'^register/$','main.views.register',name='register'),
-        url(r'^register_success/$','main.views.register_success',name='register_success'),
         url(r'^ticketlist/$',UserTicketView.as_view(),name='logged_usertickets'),
 
 
