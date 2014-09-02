@@ -12,18 +12,9 @@
 .flex-viewport {height:500px;}
 .slides li img {height:500px;}
 .page-header {text-align: center;}
-<style type="text/css">
-    #intro { 
-      background: url(images/intro.png) 50% 0 fixed; 
-      height: auto;  
-      margin: 0 auto; 
-        width: 100%; 
-        position: relative; 
-        box-shadow: 0 0 50px rgba(0,0,0,0.8);
-        padding: 100px 0;
-    }
+.flex-direction-nav li {line-height: 40px;}
     #home { 
-      background: url(static/main/images/home.jpg) 50% 0 fixed; 
+      background: url(static/main/images/home3.jpg) 50% 0 fixed; 
       height: auto;  
       margin: 0 auto; 
         width: 100%; 
@@ -49,13 +40,12 @@
     }
     .media-object { width: 64px; height: 64px; padding-bottom: 30px }
   </style>
-</style>
 {% endblock %}
 {% block content %}
 <section id="intro" data-speed="6" data-type="background">
 <div class="row">
     <div class="col-md-3">
-      <img class="logo" src="{% static 'main/images/no-bugs.png' %}">
+      <img class="logo" src="{% static 'main/images/logo.png' %}">
     </div>
     <div class="col-md-6">
       <div class="page-header">
