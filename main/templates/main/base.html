@@ -16,6 +16,11 @@
     </style>
     
     {% block head_extra %}{% endblock %}
+    <style type="text/css">
+    .nav {height: 50px;}
+    .nav li {height: 50px;}
+    .nav li a{height: 50px;}
+    </style>
 </head>   
 <body>
         <!-- Fixed navbar -->
@@ -32,7 +37,8 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="{% url 'index' %}">Home</a></li>
+            <li><img src="{% static 'main/images/logo.png' %}" style="width:50px; margin-right:10px;"></li>
+            <li class="active" ><a href="{% url 'index' %}">Home</a></li>
             {% for group in user.groups.all %}
               {% if group.name == 'HelpDesk' %}
               <li>
@@ -78,7 +84,7 @@
 
 {% block body_extra %}{% endblock %}
 {% block footer %}
-<div class="row">
+<div class="container">
     <div class="col-md-12" style="margin-top:40px;text-align:left;font-weight:bold;">
        <span id="footer">© 1999-2014 ERC Solutions, Inc. All Rights Reserved.</span>
   </div>
