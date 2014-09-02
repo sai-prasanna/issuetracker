@@ -69,19 +69,14 @@ class TicketCreateView(SuccessMessageMixin, CreateView):
         else:
             return redirect('index')
 
-class TicketListView(AjaxListView):
-    model = Ticket
-    context_object_name = "ticket_list"
-    template_name = "ticket_list.html"
-    paginate_by = 10
 
 
-class UserTicketView(AjaxListView):
+class UserTicketListView(AjaxListView):
     model = Ticket
     context_object_name = "user_ticketlist"
-    template_name = "main/user_ticketlist.html"
-    page_template = "main/user_ticketlist_page.html"
-    paginate_by = 2
+    template_name = "main/user_ticket_list.html"
+    page_template = "main/user_ticket_list_page.html"
+    paginate_by = 10
 
 
     def get_queryset(self):
@@ -119,7 +114,7 @@ class TicketUpdateView(SuccessMessageMixin, UpdateView):
             self.template_name = 'main/ticket_form.html'
             return CreateTicketForm
         elif self.request.user.groups.filter(name='Supervisor').exists():
-            self.template_name='main/ticket_supervisorform.html'
+            self.template_name='main/ticket_supervisor_form.html'
             return SupervisorUpdateTicketForm
         else:
             return None

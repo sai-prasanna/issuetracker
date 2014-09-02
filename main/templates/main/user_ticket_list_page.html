@@ -5,6 +5,8 @@
         <!-- Default panel contents -->
         <div class="panel-heading">Ticket List</div>
         <!-- Table -->
+        {% if ticket_list %}
+
         <table class="table">
             <tr>
                 <th>Name</th>
@@ -12,9 +14,9 @@
                 <th>Ticket no</th>
                 <th>Status</th>
             </tr>
-            {% paginate ticket_list %}
+            {% paginate user_ticketlist %}
 
-            {% for ticket in ticket_list %}
+            {% for ticket in user_ticketlist %}
             <tr class="list_ticket">
                 <td><a href="{% url 'ticket_detail' ticket.id %}">{{ticket.name}}</a></td>
                 <td>{{ticket.client}}</td>
@@ -27,5 +29,10 @@
 
         </table>
         {% show_pages %}
+
+        {% else %}
+        <center><h3>No Tickets for you</h3></center>
+        {% endif %}
+
     </div>
 </div>
