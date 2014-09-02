@@ -83,7 +83,7 @@ class UserTicketListView(AjaxListView):
                 ticket_list = Ticket.objects.filter(assigned_to = self.request.user)
             elif self.request.user.groups.filter(name='Client').exists():
                 ticket_list = Ticket.objects.filter(client = self.request.user)
-            elif self.request.user.groups.filter(name='Supervisor').exist():
+            elif self.request.user.groups.filter(name='Supervisor').exists():
                 return Ticket.objects.all()
             return ticket_list
 

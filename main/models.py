@@ -10,7 +10,7 @@ class ClientProfile(models.Model):
     phone_number = models.CharField(max_length=15)
    
     def __unicode__(self):
-        return self.user
+        return self.user.username + ":" + self.company_name
 
 class Ticket(models.Model):
     PRIORITY = (
