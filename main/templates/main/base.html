@@ -46,7 +46,9 @@
               </li>
             {% endif %}
             {% endfor %}
+            {% if request.user.is_authenticated %}
             <li><a href="{% url 'ticket_list' %}">View Issues</a></li>
+            {% endif %}
             <li><a href="#">About</a></li>  
         </ul>
         <ul class="nav navbar-nav navbar-right">
