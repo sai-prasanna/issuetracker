@@ -5,10 +5,9 @@ from django.contrib.auth.models import User
 
 
 class CreateTicketForm(forms.ModelForm):
-
     class Meta:
         model = Ticket
-        exclude = ('logged_by', 'status',)
+        exclude = ('logged_by', 'status', 'resolution')
 
 class EngineerUpdateTicketForm(forms.ModelForm):
 
@@ -35,7 +34,7 @@ class SupervisorUpdateTicketForm(forms.ModelForm):
 class ClientRegistrationForm(UserCreationForm):
 
     address = forms.CharField()
-    phone_number = forms.CharField(max_length=10)
+    phone_number = forms.RegexField(regex=r'^\+?1?\d{9,15}$', error_message = ("Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."))
 
     class Meta:
         model = User

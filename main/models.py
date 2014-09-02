@@ -6,10 +6,11 @@ class ClientProfile(models.Model):
 
     user = models.OneToOneField(User)
     address = models.TextField()
-    phone_number = models.CharField(max_length=200)
+    company_name = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=15)
    
     def __unicode__(self):
-        return self.address
+        return self.user
 
 class Ticket(models.Model):
     PRIORITY = (
@@ -35,11 +36,7 @@ class Ticket(models.Model):
     description = models.TextField(blank=True, null=True)
     resolution = models.TextField(blank=True, null=True)
     
-    def get_fields(self):
-        li=[]
-        for field in Ticket._meta.fields:
-            li.append((field.verbose_name, field.value_to_string(self)))
-        return li
+
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
         return reverse('ticket_detail', args=[str(self.id)])

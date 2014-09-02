@@ -27,16 +27,13 @@ def register(request):
             user.groups.add(Group.objects.get(name="Client"))
             client = ClientProfile(user=user,address=form.cleaned_data['address'],phone_number=form.cleaned_data['phone_number'])
             client.save()
-            messages.success(request,'Registered successfully and logged in ')
+            messages.success(request,'Registered successfully and please login')
             return redirect('index')
     args={}
     args.update(csrf(request))
     args['form']=ClientRegistrationForm()
 
     return render(request,'main/register.html',args)
-
-
-
 
 
 def home(request):
@@ -86,7 +83,7 @@ class UserTicketListView(AjaxListView):
                 ticket_list = Ticket.objects.filter(assigned_to = self.request.user)
             elif self.request.user.groups.filter(name='Client').exists():
                 ticket_list = Ticket.objects.filter(client = self.request.user)
-            elif self.request.user.groups.filter(name="Supervisor").exist():
+            elif self.request.user.groups.filter(name='Supervisor').exist():
                 return Ticket.objects.all()
             return ticket_list
 
