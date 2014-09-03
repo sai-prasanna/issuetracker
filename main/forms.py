@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class CreateTicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
-        exclude = ('logged_by', 'status', 'resolution')
+        fields = ('client', 'name', 'assigned_to', 'priority', 'description')
 
 class EngineerUpdateTicketForm(forms.ModelForm):
 

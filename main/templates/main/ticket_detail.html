@@ -46,20 +46,28 @@
 			</div>
 			{% elif ticket.priority ==  "N" %}
 			<div class="progress">
-  				<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+  				<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
     				<span class="sr-only">70% Complete</span>
   				</div>
 			</div>
 			{% elif ticket.priority == "L" %}
 			<div class="progress">
-  				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+  				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
     				<span class="sr-only">40% Complete</span>
   				</div>
 			</div>
 			{% endif %}
 		</div>
 	</div>
-	<div class="col-md-3"></div>
+	<div class="col-md-3">
+        {% if time_until_etc > 0 %}
+            Estimated completion time is within {{ time_until_etc }} hours
+        {% elif ticket.status == "R"  %}
+            Ticket is closed.
+        {% else %}
+            Exceeded SLA time, waiting for resolution.
+        {% endif %}
+    </div>
 	<div class="col-md-3">
 		<h2 class="ticketno">Ticket Number:<span>{{ticket.id}}</span></h2>
 			<div class="user">

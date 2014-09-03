@@ -12,7 +12,8 @@ from django.core.context_processors import csrf
 from .models import Ticket, ClientProfile
 from .forms import CreateTicketForm, EngineerUpdateTicketForm, SupervisorUpdateTicketForm, ClientRegistrationForm
 from django.contrib.auth.models import Group
-
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
@@ -37,7 +38,13 @@ def register(request):
 
 
 def home(request):
-    return render(request,'main/index.html')
+    ticket_logged_count = Ticket.objects.all().count()
+    ticket_resolved_count = Ticket.objects.filter(status='R').count()
+    args = {}
+    args['ticket_count'] = ticket_logged_count
+    args['ticket_resolved_count'] = ticket_resolved_count
+
+    return render(request,'main/index.html', args)
 
 
 def logout_view(request):
@@ -55,9 +62,14 @@ class TicketCreateView(SuccessMessageMixin, CreateView):
         form = super(TicketCreateView, self).get_form(form_class)
         form.fields['client'].queryset = User.objects.filter(groups__name='Client')
         form.fields['assigned_to'].queryset = User.objects.filter(groups__name='Engineer')
-        form.instance.logged_by = self.request.user
         return form
-
+    
+    def form_valid(self, form):
+        form.instance.logged_by = self.request.user
+        form.instance.date_time = datetime.now()
+        hours_sla = Ticket.SLA[form.instance.priority]
+        form.instance.estimated_completion_time = form.instance.date_time + timedelta(hours=hours_sla)
+        return super(TicketCreateView, self).form_valid(form)
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -93,8 +105,12 @@ class TicketDetailView(DetailView):
     context_object_name = 'ticket'
 
     def get_context_data(self, **kwargs):
+        ticket = self.get_object()
         context = super(TicketDetailView, self).get_context_data(**kwargs)
         context['is_supervisor'] = self.request.user.groups.filter(name='Supervisor').exists()
+        timedelta_until_ect = ticket.estimated_completion_time - timezone.now()
+        context['time_until_etc'] = timedelta_until_ect.total_seconds() // 3600
+
         return context
 
 

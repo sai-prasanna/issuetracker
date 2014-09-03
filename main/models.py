@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import timedelta, datetime
 
-# Create your models here.
 class ClientProfile(models.Model):
 
     user = models.OneToOneField(User)
@@ -13,11 +13,14 @@ class ClientProfile(models.Model):
         return u"%s : %s " %(self.user.username, self.company_name)
 
 class Ticket(models.Model):
+
     PRIORITY = (
             ('L', 'Low'),
             ('N', 'Normal'),
             ('H', 'High'),
          )
+
+    SLA = {'L':24, 'N':72, 'H':120}
     STATUS = (
             ('N', 'New'),
             ('U', 'Under Investigation'),
@@ -32,10 +35,9 @@ class Ticket(models.Model):
     assigned_to = models.ForeignKey(User, related_name='assigned_ticket')
     priority = models.CharField(max_length=1, choices=PRIORITY, default=PRIORITY[1][0])
     status = models.CharField(max_length=1,choices=STATUS, default=STATUS[0][0])
-    time_elapsed = models.DateTimeField()
+    estimated_completion_time = models.DateTimeField()
     description = models.TextField(blank=True, null=True)
     resolution = models.TextField(blank=True, null=True)
-    
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
