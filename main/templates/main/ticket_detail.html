@@ -33,7 +33,7 @@
 	<div class="col-md-6">
 		<div class="status">
 			Current Status: 
-			<span class="label {% if ticket.status == 'N' %}label-default{% elif ticket.status == 'U' %}label-primary{% elif ticket.status == 'R' %}label-info{% elif ticket.status == 'V' %}label-success{% endif %}">{{ticket.get_status_display}}</span>
+			<span class="label {% if ticket.status == 'N' %}label-default{% elif ticket.status == 'U' %}label-primary{% elif ticket.status == 'R' %}label-info{% elif ticket.status == 'C' %}label-success{% endif %}">{{ticket.get_status_display}}</span>
 
 		</div>
 		<div class="priority">

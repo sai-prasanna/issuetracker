@@ -11,15 +11,15 @@
                 <th>Ticket no</th>
                 <th>Status</th>
             </tr>
-            {% paginate user_ticketlist %}
+            {% paginate user_ticket_list %}
 
-            {% for ticket in user_ticketlist %}
+            {% for ticket in user_ticket_list %}
             <tr class="list_ticket">
                 <td><a href="{% url 'ticket_detail' ticket.id %}">{{ticket.name}}</a></td>
                 <td>{{ticket.client}}</td>
                 <td>{{ticket.id}}</td>
                 <td>
-                    <span class="label {% if ticket.status == 'N' %}label-default{% elif ticket.status == 'U' %}label-primary{% elif ticket.status == 'R' %}label-info{% elif ticket.status == 'V' %}label-success{% endif %}">{{ticket.get_status_display}}</span>
+                    <span class="label {% if ticket.status == 'N' %}label-default{% elif ticket.status == 'U' %}label-primary{% elif ticket.status == 'R' %}label-info{% elif ticket.status == 'C' %}label-success{% endif %}">{{ticket.get_status_display}}</span>
                 </td>
             </tr>
             {% endfor %}

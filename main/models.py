@@ -10,7 +10,7 @@ class ClientProfile(models.Model):
     phone_number = models.CharField(max_length=15)
    
     def __unicode__(self):
-        return self.user.username + ":" + self.company_name
+        return u"%s : %s " %(self.user.username, self.company_name)
 
 class Ticket(models.Model):
     PRIORITY = (
@@ -22,7 +22,7 @@ class Ticket(models.Model):
             ('N', 'New'),
             ('U', 'Under Investigation'),
             ('R', 'Resolved'),
-            ('V', 'Verified'),
+            ('C', 'Closed'),
 
          )
     client = models.ForeignKey(User, related_name='ticket')

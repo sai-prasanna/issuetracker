@@ -70,7 +70,7 @@ class TicketCreateView(SuccessMessageMixin, CreateView):
 
 class UserTicketListView(AjaxListView):
     model = Ticket
-    context_object_name = "user_ticketlist"
+    context_object_name = "user_ticket_list"
     template_name = "main/user_ticket_list.html"
     page_template = "main/user_ticket_list_page.html"
     paginate_by = 10
@@ -106,16 +106,24 @@ class TicketUpdateView(SuccessMessageMixin, UpdateView):
     def get_form_class(self):
         ticket = self.get_object()
         if self.request.user.groups.filter(name='Engineer').exists() and ticket.assigned_to == self.request.user:
+            self.template_name = 'main/ticket_engineer_update_form.html'
             return EngineerUpdateTicketForm
         elif self.request.user.groups.filter(name='HelpDesk').exists() and ticket.logged_by == self.request.user:
             self.template_name = 'main/ticket_form.html'
             return CreateTicketForm
         elif self.request.user.groups.filter(name='Supervisor').exists():
-            self.template_name='main/ticket_supervisor_form.html'
+            self.template_name='main/ticket_supervisor_update_form.html'
             return SupervisorUpdateTicketForm
         else:
             return None
 
+    def get_form(self, form_class):
+        form_class = self.get_form_class()
+        form = super(TicketUpdateView, self).get_form(form_class)
+        if form_class == EngineerUpdateTicketForm or form_class == SupervisorUpdateTicketForm :
+            form.fields['assigned_to'].queryset = User.objects.filter(groups__name='Engineer')
+
+        return form
         
 
     @method_decorator(login_required)

@@ -20,7 +20,7 @@ class EngineerUpdateTicketForm(forms.ModelForm):
 
     class Meta:
         model = Ticket
-        fields = ['status', 'description', 'resolution']
+        fields = ['status', 'description', 'resolution', 'assigned_to']
 
 
 
@@ -28,7 +28,7 @@ class SupervisorUpdateTicketForm(forms.ModelForm):
 
     class Meta:
         model = Ticket
-        fields = ['status']
+        fields = ['status', 'assigned_to']
 
 
 class ClientRegistrationForm(UserCreationForm):
