@@ -66,7 +66,7 @@ class TicketCreateView(SuccessMessageMixin, CreateView):
     
     def form_valid(self, form):
         form.instance.logged_by = self.request.user
-        form.instance.date_time = datetime.now()
+        form.instance.date_time = timezone.now()
         hours_sla = Ticket.SLA[form.instance.priority]
         form.instance.estimated_completion_time = form.instance.date_time + timedelta(hours=hours_sla)
         return super(TicketCreateView, self).form_valid(form)

@@ -1,5 +1,24 @@
 body {
   padding-top: 80px;
 }
+.well h2{
+    font-size: 21px;
+    margin-top: -10px;
+}
+#total_tickets{
+    font-size: 45px;
+    text-align: center;
+    color: #6A6663;
+}
+#resolved_tickets{
+    font-size: 45px;
+    text-align: center;
+    color: #6A6663;
+}
+.well p{
+    padding-top: 25px;
+    font-size: 20px;
+    text-align: center;
+}
 .list_ticket td a {text-decoration: none;color:#222;font-weight: bold;}
 .footer {margin-top:50px;color:white;color:#17375e; text-align: center;}

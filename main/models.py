@@ -4,7 +4,7 @@ from datetime import timedelta, datetime
 
 class ClientProfile(models.Model):
 
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, related_name='profile')
     address = models.TextField()
     company_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=15)

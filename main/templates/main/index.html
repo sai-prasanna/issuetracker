@@ -77,12 +77,14 @@
 <section id="home" data-speed="4" data-type="background">
     <div class="container-fluid">
       <div class="row-fluid">
-            <div class="span12 well">
+        <div class="col-lg-4"></div>
+            <div class="col-lg-4 well">
               <center><h2>Stats</h2></center>
-              <p>Total Number of Issues Added <span id="totaltickets"></span></p>
-              <p>Total Number of Issues Resolved <span id="resolvedtickets"></span></p>
-
+              <p><div id="total_tickets" data-count={{ticket_count}}></div><br><center>Total Number of Issues Added </center></p>
+              <p><div id="resolved_tickets" data-count={{ticket_resolved_count}}></div><br><center>Total Number of Issues Resolved </center></p>
+              
             </div>
+            <div class="col-lg-4"></div>
         </div>
       </div>
   </section>
@@ -165,31 +167,9 @@
     <script src="{% static 'main/js/countUp.js' %}"></script>
       <script type="text/javascript" src="{% static 'main/slider/jquery.flexslider-min.js' %}"></script>
     <script src="{% static 'main/js/init.js' %}"></script>
-    <script type="text/javascript">
+        <script src="{% static 'main/js/index_count_slider.js' %}"></script>
 
-      $(window).load(function() {
-      $('.flexslider').flexslider({
-      animation: "slide"
-      });
 
-    });
-      var eventFired = false,
-    objectPositionTop = $('#totaltickets').offset().top;
-
-$(window).on('scroll', function() {
-
- var currentPosition = $(document).scrollTop();
- if (currentPosition > objectPositionTop && eventFired === false) {
-   eventFired = true;
-   var ticketAnim = new countUp("totaltickets", 0,{{ticket_count}},0,2);
-    var resolvedAnim = new countUp("resolvedtickets", 0,{{ticket_resolved_count}},0,2);
-
-  ticketAnim.start();
-  resolvedAnim.start();
-
- }
-
-});
 </script>
 {% endblock %}
 
