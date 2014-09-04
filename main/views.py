@@ -39,7 +39,7 @@ def register(request):
 
 def home(request):
     ticket_logged_count = Ticket.objects.all().count()
-    ticket_resolved_count = Ticket.objects.filter(status='R').count()
+    ticket_resolved_count = Ticket.objects.filter(status='C').count()
     args = {}
     args['ticket_count'] = ticket_logged_count
     args['ticket_resolved_count'] = ticket_resolved_count

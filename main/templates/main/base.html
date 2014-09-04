@@ -38,18 +38,18 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><img src="{% static 'main/images/logo.png' %}" style="width:50px; margin-right:10px;"></li>
-            <li class="active" ><a href="{% url 'index' %}">Home</a></li>
+            <li {% block activehome %} {% endblock %}><a href="{% url 'index' %}">Home</a></li>
             {% for group in user.groups.all %}
               {% if group.name == 'HelpDesk' %}
-              <li>
+              <li {% block activecreate %}{% endblock %}>
                   <a href="{% url 'ticket_create' %}" style="text-decoration: none;">Create Issue</a>
               </li>
             {% endif %}
             {% endfor %}
             {% if request.user.is_authenticated %}
-            <li><a href="{% url 'ticket_list' %}">View Issues</a></li>
+            <li {% block activeview %}{% endblock %}><a href="{% url 'ticket_list' %}">View Issues</a></li>
             {% endif %}
-            <li><a href="#">About</a></li>  
+            <li {% block activeabout %}{% endblock %}><a href="#">About</a></li>  
         </ul>
         <ul class="nav navbar-nav navbar-right">
           
@@ -57,8 +57,8 @@
             <li><a href="#" style="color:#FFF;">Welcome {{request.user.username}}</a></li>
             <li><a href="{% url 'logout' %}" >Logout</a></li>
           {% else %}
-            <li><a href="{% url 'register' %}">New User?</a></li>
-            <li><a href="{% url 'login' %}" >Login</a></li>
+            <li {% block activereg %}{% endblock %}><a href="{% url 'register' %}">New User?</a></li>
+            <li {% block activelogin %}{% endblock %}><a href="{% url 'login' %}" >Login</a></li>
           {% endif %}
 
       </ul>

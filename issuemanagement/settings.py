@@ -84,6 +84,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = '/Users/sai/Desktop/dev/web-dev/issue-tracking/static/'
+
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 LOGIN_URL = '/login'

@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
-
+{% block activelogin %}class="active"{% endblock %}
 {% block css %}
  {{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/login.css' %}">

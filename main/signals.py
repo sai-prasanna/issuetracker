@@ -31,7 +31,7 @@ def notification(sender, instance, created, **kwargs):
 
 
 
-    if instance.status == 'V':
+    if instance.status == 'C':
         client_email_subj = " Issue no: %s [%s] has been Resolved  " %(str(instance.id), instance.get_priority_display())
         email_body = """
 
@@ -43,7 +43,7 @@ def notification(sender, instance, created, **kwargs):
         url          : %s
 
          """ % (str(instance.id), instance.name, instance.client.username, 
-                instance.assigned_to.username, instance.priority.get_priority_display(), 
+                instance.assigned_to.username, instance.get_priority_display(), 
                 instance.get_absolute_url())
         
         send_mail(client_email_subj, email_body,'issuetrackingproject@gmail.com',[instance.client.email]) 

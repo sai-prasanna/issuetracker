@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% block head_title %}Index{% endblock %}
-
+{% block activehome %}class="active"{% endblock %}
 {% block head_extra %}
 <link rel="stylesheet" type="text/css" href="{% static 'main/slider/flexslider.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap_par.min.css' %}">
@@ -44,7 +44,7 @@
 {% block content %}
 <section id="intro" data-speed="6" data-type="background">
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 col-xs-3 col-sm-3">
       <img class="logo" src="{% static 'main/images/logo.png' %}">
     </div>
     <div class="col-md-6">

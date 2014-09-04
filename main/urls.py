@@ -1,6 +1,9 @@
 from django.conf.urls import patterns, include, url
 from .views import TicketCreateView, TicketDetailView, TicketUpdateView, UserTicketListView
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls.static import static
+from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -14,3 +17,4 @@ urlpatterns = patterns('',
         url(r'^register/$','main.views.register',name='register'),
     )
 
+urlpatterns += staticfiles_urlpatterns()
