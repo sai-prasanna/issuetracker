@@ -100,6 +100,24 @@ EMAIL_HOST_PASSWORD = 'issuetracking'
 
 EMAIL_PORT = 587
 
+
+#REDIS cache and sessions 
+
+SESSION_ENGINE = 'redis_sessions.session'
+SESSION_REDIS_UNIX_DOMAIN_SOCKET_PATH = '/tmp/redis.sock'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.RedisCache',
+        'LOCATION': '/tmp/redis.sock',
+        'OPTIONS': {
+            'DB': 1,
+            'PASSWORD': '',
+            'PARSER_CLASS': 'redis.connection.HiredisParser'
+        },
+    },
+}
+
 try:
     from local_settings import *
 except ImportError:

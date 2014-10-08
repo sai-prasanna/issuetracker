@@ -21,6 +21,10 @@ MESSAGE_TAGS = {
 
 
 def register(request):
+    """ 
+    View for Client registration
+
+    """
     if request.method == 'POST':
         form = ClientRegistrationForm(request.POST)
         if form.is_valid():            
@@ -38,6 +42,10 @@ def register(request):
 
 
 def home(request):
+    """
+        View for homepage, with ticket count in context 
+
+    """
     ticket_logged_count = Ticket.objects.all().count()
     ticket_resolved_count = Ticket.objects.filter(status='C').count()
     args = {}
@@ -48,6 +56,9 @@ def home(request):
 
 
 def logout_view(request):
+    """
+        View to logout 
+    """
     messages.success(request, 'Logged out successfully')
     logout(request)
     return redirect('index')
@@ -81,6 +92,10 @@ class TicketCreateView(SuccessMessageMixin, CreateView):
 
 
 class UserTicketListView(AjaxListView):
+    """
+        Paginated view to list issues.Issues are listed based on group to which user belongs to and wether he/she
+        has permission to view the ticket
+    """
     model = Ticket
     context_object_name = "user_ticket_list"
     template_name = "main/user_ticket_list.html"
@@ -101,6 +116,9 @@ class UserTicketListView(AjaxListView):
 
 
 class TicketDetailView(DetailView):
+    """
+        View for displaying Single ticket details
+    """
     model = Ticket
     context_object_name = 'ticket'
 
@@ -115,6 +133,10 @@ class TicketDetailView(DetailView):
 
 
 class TicketUpdateView(SuccessMessageMixin, UpdateView):
+    """
+    View for Updating ticket,it dynamicaly shows form based on user prievelege to update the ticket
+
+    """
     model = Ticket
     context_object_name = 'ticket'
     success_message = "Ticket was updated successfully"

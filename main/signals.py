@@ -5,6 +5,9 @@ import requests
 
 
 def notification(sender, instance, created, **kwargs):
+    """
+        Send email and sms to users
+    """
     if created:
 
         engineer_email_id = instance.assigned_to.email

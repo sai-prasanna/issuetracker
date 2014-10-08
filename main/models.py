@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from datetime import timedelta, datetime
 
 class ClientProfile(models.Model):
+    """
+    Model to store client profile .
+    address,company name, phone number as fields
+
+    """
 
     user = models.OneToOneField(User, related_name='profile')
     address = models.TextField()
@@ -13,6 +18,9 @@ class ClientProfile(models.Model):
         return u"%s : %s " %(self.user.username, self.company_name)
 
 class Ticket(models.Model):
+    """
+        Model to store  ticket
+    """
 
     PRIORITY = (
             ('L', 'Low'),
